@@ -1,19 +1,24 @@
 {
-  let memo: { [key: number]: number } = {};
+  let memo: { [key: string]: boolean } = {};
 
   function isSubset(i: number, w: number, a: number[]): boolean {
-    console.log(`i : ${i}, w : ${w}`);
+    const key = `${i},${w}`;
+    console.log(key);
+    if (key in memo) return memo[key];
     if (w === 0) return true;
     if (i === 0 && w !== 0) return false;
     // a[i-1]を選ばないとき
-    if (isSubset(i - 1, w, a)) return true;
+    if (isSubset(i - 1, w, a)) return (memo[key] = true);
     // a[i-1]を選ぶとき
-    if (isSubset(i - 1, w - a[i - 1], a)) return true;
+    if (isSubset(i - 1, w - a[i - 1], a)) return (memo[key] = true);
 
-    return false;
+    return (memo[key] = false);
   }
 
-  console.log(isSubset(4, 5, [1, 2, 3, 4]));
+  const st = performance.now();
+  console.log(isSubset(10, 22, [1, 2, 3, 4, 8, 9, 11, 13, 15, 18]));
+  const ed = performance.now();
+  console.log(`実行結果 : ${ed - st} ms`);
 }
 
 /* isSubsetの全体像

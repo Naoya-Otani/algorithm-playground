@@ -22,6 +22,9 @@ const arr = [2, 5, 7, 13];
 const target = 11;
 const i = arr.length;
 
-console.log(isSubset(i, target, arr));
+const st = performance.now();
+console.log(isSubset(12, 22, [1, 2, 3, 4, 8, 9, 11, 13, 15, 18, 20, 22]));
+const ed = performance.now();
+console.log(`実行結果 : ${ed - st} ms`);
 
 // a[i-1]から走査しているが、a[1]からでも可能
